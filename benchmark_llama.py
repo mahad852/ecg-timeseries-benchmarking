@@ -121,7 +121,7 @@ print(f"Std. of time taken to run : {np.std(total_times)}")
 if not os.path.exists("logs"):
     os.mkdir("logs")
 
-with open(os.path.join("logs", f"LagLlama_benchmark.csv"), "w") as f:
+with open(os.path.join("logs", f"LagLlama_benchmark.txt"), "w") as f:
     f.write(f"Number of iterations: {num_iterations} | Number of batches: {total_samples/batch_size} | Batch Size: {batch_size} \n")
     f.write(f"Average time taken to run : {np.average(total_times)} \n")
     f.write(f"Std. of time taken to run : {np.std(total_times)}")

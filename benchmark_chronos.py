@@ -52,7 +52,7 @@ for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x))
-        
+        print(x.shape)
         pipeline.predict(
             context=x,
             prediction_length=pred_len,
