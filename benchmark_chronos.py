@@ -41,9 +41,9 @@ pipeline = ChronosPipeline.from_pretrained(
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.float64,
 )
-pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
-pipeline.tokenizer.boundaries = pipeline.tokenizer.boundaries.to(torch.device("cuda:0"))
-print(pipeline.model.device, pipeline.tokenizer.centers.device)
+# pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
+# pipeline.tokenizer.boundaries = pipeline.tokenizer.boundaries.to(torch.device("cuda:0"))
+# print(pipeline.model.device, pipeline.tokenizer.centers.device)
 
 
 total_times = []
@@ -51,7 +51,7 @@ total_times = []
 for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
-        x = torch.tensor(np.array(x), device=torch.device("cuda:0"))
+        x = torch.tensor(np.array(x))
         print(x.device, x[0].device, x[-1].device)
         
         pipeline.predict(
