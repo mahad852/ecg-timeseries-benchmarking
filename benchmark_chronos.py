@@ -41,7 +41,7 @@ pipeline = ChronosPipeline.from_pretrained(
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.float64,
 )
-pipeline.tokenizer.centers.to(torch.device("cuda:0"))
+pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
 print(pipeline.model.device, pipeline.tokenizer.centers.device)
 
 
