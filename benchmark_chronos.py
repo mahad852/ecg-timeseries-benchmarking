@@ -40,9 +40,11 @@ pipeline = ChronosPipeline.from_pretrained(
     "amazon/chronos-t5-small",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.float64,
+    
+    tokenizer_kwargs = {"device" : torch.device("cuda:0")},
 )
 
-print(pipeline.model.device)
+print(pipeline.model.device, pipeline.tokeizer.centers.device)
 
 
 total_times = []
