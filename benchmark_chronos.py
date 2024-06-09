@@ -48,11 +48,10 @@ pipeline = ChronosPipeline.from_pretrained(
 
 total_times = []
 
-for _ in range(num_iterations):
+for i in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x))
-        print(x.shape)
         pipeline.predict(
             context=x,
             prediction_length=pred_len,
@@ -60,6 +59,8 @@ for _ in range(num_iterations):
         )
 
     end_time = time.time()
+
+    print(f"Iteration: {i} Time taken: {end_time - start_time}")
 
     total_times.append(end_time - start_time)
 
