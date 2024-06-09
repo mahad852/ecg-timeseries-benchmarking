@@ -110,12 +110,12 @@ num_samples = 100 # number of samples sampled from the probability distribution 
 
 for i in range(num_iterations):
     start_time = time.time()
-    _, _, time_taken = get_lag_llama_predictions(backtest_dataset, num_samples=num_samples)
+    get_lag_llama_predictions(backtest_dataset, num_samples=num_samples)
     end_time = time.time()
 
     print("Iteration:", i, "time taken:", end_time - start_time)
 
-    total_times.append(time_taken)
+    total_times.append(end_time - start_time)
 
 print(f"Number of iterations: {num_iterations} | Number of batches: {total_samples/batch_size} | Batch Size: {batch_size}")
 print(f"Average time taken to run : {np.average(total_times)}")
