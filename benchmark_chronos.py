@@ -42,6 +42,7 @@ pipeline = ChronosPipeline.from_pretrained(
     torch_dtype=torch.float64,
 )
 pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
+pipeline.tokenizer.boundaries = pipeline.tokenizer.boundaries.to(torch.device("cuda:0"))
 print(pipeline.model.device, pipeline.tokenizer.centers.device)
 
 
