@@ -39,7 +39,6 @@ indices = random.sample(range(len(ecg_dataset)), total_samples)
 pipeline = ChronosPipeline.from_pretrained(
     "amazon/chronos-t5-small",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
-    device="cuda:0",
     torch_dtype=torch.float64,
 )
 pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
