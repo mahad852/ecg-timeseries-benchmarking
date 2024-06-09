@@ -37,11 +37,11 @@ def batch_loader(dataset: ECG_MIT, indices: list[int], batch_size: int):
 indices = random.sample(range(len(ecg_dataset)), total_samples)
 
 pipeline = ChronosPipeline.from_pretrained(
-    "amazon/chronos-t5-tiny",
+    "amazon/chronos-t5-small",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.bfloat16,
 )
-pipeline = pipeline.to(torch.device("cuda:0"))
+
 
 total_times = []
 
@@ -49,7 +49,7 @@ for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x), device=torch.device("cuda:0"))
-        print(x)
+        print(x.device, x[0].device)
         
         pipeline.predict(
             context=x,
