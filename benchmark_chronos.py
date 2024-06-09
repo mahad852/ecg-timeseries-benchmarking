@@ -41,6 +41,7 @@ pipeline = ChronosPipeline.from_pretrained(
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.bfloat16,
 )
+pipeline = pipeline.to(torch.device("cuda:0"))
 
 total_times = []
 
@@ -49,6 +50,7 @@ for _ in range(num_iterations):
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x), device=torch.device("cuda:0"))
         print(x)
+        
         pipeline.predict(
             context=x,
             prediction_length=pred_len,
