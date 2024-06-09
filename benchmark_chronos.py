@@ -11,7 +11,7 @@ context_len = 512
 pred_len = 64
 ecg_dataset = ECG_MIT(context_len=context_len, pred_len=pred_len, data_path="/home/user/MIT-BIH.npz")
 
-batch_size = 64
+batch_size = 1
 total_samples = batch_size * 100
 
 num_iterations = 20
@@ -37,7 +37,7 @@ def batch_loader(dataset: ECG_MIT, indices: list[int], batch_size: int):
 indices = random.sample(range(len(ecg_dataset)), total_samples)
 
 pipeline = ChronosPipeline.from_pretrained(
-    "amazon/chronos-t5-small",
+    "amazon/chronos-t5-tiny",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.float64,
 )
