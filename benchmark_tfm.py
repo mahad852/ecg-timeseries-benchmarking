@@ -9,8 +9,8 @@ context_len = 64
 pred_len = 64
 ecg_dataset = ECG_MIT(context_len=context_len, pred_len=pred_len, data_path="/home/user/MIT-BIH.npz")
 
-batch_size = 64
-total_samples = batch_size * 50
+batch_size = 16
+total_samples = batch_size * 20
 
 num_iterations = 10
 

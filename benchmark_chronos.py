@@ -7,14 +7,14 @@ import time
 import torch
 from chronos import ChronosPipeline
 
-context_len = 512
+context_len = 64
 pred_len = 64
 ecg_dataset = ECG_MIT(context_len=context_len, pred_len=pred_len, data_path="/home/user/MIT-BIH.npz")
 
 batch_size = 16
-total_samples = batch_size * 100
+total_samples = batch_size * 20
 
-num_iterations = 20
+num_iterations = 10
 
 def single_loader(dataset: ECG_MIT, indices: list[int]):
     for index in indices:
