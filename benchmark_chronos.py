@@ -11,7 +11,7 @@ context_len = 512
 pred_len = 64
 ecg_dataset = ECG_MIT(context_len=context_len, pred_len=pred_len, data_path="/home/user/MIT-BIH.npz")
 
-batch_size = 1
+batch_size = 16
 total_samples = batch_size * 100
 
 num_iterations = 20
@@ -52,7 +52,6 @@ for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x))
-        print(x.device, x[0].device, x[-1].device)
         
         pipeline.predict(
             context=x,
@@ -72,7 +71,7 @@ print(f"Std. of time taken to run : {np.std(total_times)}")
 if not os.path.exists("logs"):
     os.mkdir("logs")
 
-with open(os.path.join("logs", f"Chronos_benchmark.csv"), "w") as f:
+with open(os.path.join("logs", f"Chronos_benchmark.txt"), "w") as f:
     f.write(f"Number of iterations: {num_iterations} | Number of batches: {total_samples/batch_size} | Batch Size: {batch_size} \n")
     f.write(f"Average time taken to run : {np.average(total_times)} \n")
     f.write(f"Std. of time taken to run : {np.std(total_times)}")
