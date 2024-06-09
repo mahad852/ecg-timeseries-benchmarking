@@ -42,6 +42,8 @@ pipeline = ChronosPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
 )
 
+print(pipeline.model.device)
+
 
 total_times = []
 
