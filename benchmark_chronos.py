@@ -51,7 +51,7 @@ for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
         x = torch.tensor(np.array(x), device=torch.device("cuda:0"))
-        print(x.device, x[0].device)
+        print(x.device, x[0].device, x[-1].device)
         
         pipeline.predict(
             context=x,
