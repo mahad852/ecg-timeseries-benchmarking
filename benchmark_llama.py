@@ -105,7 +105,7 @@ def build_timeseries(dataset: ECG_MIT, indices: list[int]):
 dataset = build_timeseries(ecg_dataset, indices)
 
 backtest_dataset = dataset
-num_samples = 100 # number of samples sampled from the probability distribution for each timestep
+num_samples = 20 # number of samples sampled from the probability distribution for each timestep
 
 
 for i in range(num_iterations):

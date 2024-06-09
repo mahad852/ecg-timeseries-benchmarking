@@ -41,7 +41,7 @@ model_type = "large"
 pipeline = ChronosPipeline.from_pretrained(
     f"amazon/chronos-t5-{model_type}",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
-    torch_dtype=torch.float64,
+    torch_dtype=torch.bfloat16,
 )
 # pipeline.tokenizer.centers = pipeline.tokenizer.centers.to(torch.device("cuda:0"))
 # pipeline.tokenizer.boundaries = pipeline.tokenizer.boundaries.to(torch.device("cuda:0"))
