@@ -39,7 +39,7 @@ indices = random.sample(range(len(ecg_dataset)), total_samples)
 pipeline = ChronosPipeline.from_pretrained(
     "amazon/chronos-t5-small",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
-    torch_dtype=torch.bfloat16,
+    torch_dtype=torch.float64,
 )
 
 print(pipeline.model.device)
