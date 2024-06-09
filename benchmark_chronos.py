@@ -36,8 +36,10 @@ def batch_loader(dataset: ECG_MIT, indices: list[int], batch_size: int):
 
 indices = random.sample(range(len(ecg_dataset)), total_samples)
 
+model_type = "mini"
+
 pipeline = ChronosPipeline.from_pretrained(
-    "amazon/chronos-t5-tiny",
+    f"amazon/chronos-t5-{model_type}",
     device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.float64,
 )
@@ -72,7 +74,7 @@ print(f"Std. of time taken to run : {np.std(total_times)}")
 if not os.path.exists("logs"):
     os.mkdir("logs")
 
-with open(os.path.join("logs", f"Chronos_benchmark.txt"), "w") as f:
+with open(os.path.join("logs", f"Chronos_benchmark_{model_type}.txt"), "w") as f:
     f.write(f"Number of iterations: {num_iterations} | Number of batches: {total_samples/batch_size} | Batch Size: {batch_size} \n")
     f.write(f"Average time taken to run : {np.average(total_times)} \n")
     f.write(f"Std. of time taken to run : {np.std(total_times)}")
