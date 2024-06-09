@@ -36,7 +36,7 @@ def batch_loader(dataset: ECG_MIT, indices: list[int], batch_size: int):
 
 indices = random.sample(range(len(ecg_dataset)), total_samples)
 
-model_type = "base"
+model_type = "large"
 
 pipeline = ChronosPipeline.from_pretrained(
     f"amazon/chronos-t5-{model_type}",
