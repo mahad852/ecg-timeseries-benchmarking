@@ -38,7 +38,7 @@ indices = random.sample(range(len(ecg_dataset)), total_samples)
 
 pipeline = ChronosPipeline.from_pretrained(
     "amazon/chronos-t5-tiny",
-    device_map="cuda",  # use "cpu" for CPU inference and "mps" for Apple Silicon
+    device_map="cuda:0",  # use "cpu" for CPU inference and "mps" for Apple Silicon
     torch_dtype=torch.bfloat16,
 )
 
@@ -47,7 +47,7 @@ total_times = []
 for _ in range(num_iterations):
     start_time = time.time()
     for _, (x, _) in enumerate(batch_loader(ecg_dataset, indices, batch_size)):
-        x = torch.tensor(np.array(x), device=torch.device("cuda"))
+        x = torch.tensor(np.array(x), device=torch.device("cuda:0"))
         print(x)
         pipeline.predict(
             context=x,
