@@ -102,14 +102,16 @@ dataset = build_timeseries(ecg_dataset, indices)
 
 backtest_dataset = dataset
 prediction_length = pred_len  # Define your prediction length. We use 24 here since the data is of hourly frequency
-num_samples = 100 # number of samples sampled from the probability distribution for each timestep
+num_samples = 20 # number of samples sampled from the probability distribution for each timestep
 device = torch.device("cuda:0") # You can switch this to CPU or other GPUs if you'd like, depending on your environment
 
 
-for _ in range(num_iterations):
+for i in range(num_iterations):
     start_time = time.time()
     get_lag_llama_predictions(backtest_dataset, prediction_length, device, context_length=context_len, num_samples=num_samples)
     end_time = time.time()
+
+    print("Iteration:", i, "time taken:", (end_time - start_time))
 
     total_times.append(end_time - start_time)
 
