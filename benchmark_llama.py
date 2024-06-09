@@ -60,15 +60,20 @@ def get_lag_llama_predictions(dataset, prediction_length, device, context_length
     transformation = estimator.create_transformation()
     predictor = estimator.create_predictor(transformation, lightning_module)
 
+    start_time = time.time()
+
     forecast_it, ts_it = make_evaluation_predictions(
         dataset=dataset,
         predictor=predictor,
         num_samples=num_samples
     )
+
+    end_time = time.time()
+
     forecasts = list(forecast_it)
     tss = list(ts_it)
 
-    return forecasts, tss
+    return forecasts, tss, end_time - start_time
 
 
 total_times = []
@@ -107,13 +112,11 @@ device = torch.device("cuda:0") # You can switch this to CPU or other GPUs if yo
 
 
 for i in range(num_iterations):
-    start_time = time.time()
-    get_lag_llama_predictions(backtest_dataset, prediction_length, device, context_length=context_len, num_samples=num_samples)
-    end_time = time.time()
+    _, _, time_taken = get_lag_llama_predictions(backtest_dataset, prediction_length, device, context_length=context_len, num_samples=num_samples)
 
-    print("Iteration:", i, "time taken:", (end_time - start_time))
+    print("Iteration:", i, "time taken:", time_taken)
 
-    total_times.append(end_time - start_time)
+    total_times.append(time_taken)
 
 print(f"Number of iterations: {num_iterations} | Number of batches: {total_samples/batch_size} | Batch Size: {batch_size}")
 print(f"Average time taken to run : {np.average(total_times)}")
