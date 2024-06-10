@@ -1,3 +1,3 @@
 Number of iterations: 10 | Number of batches: 20.0 | Batch Size: 16 
-Average time taken to run : 25.93395311832428 
-Std. of time taken to run : 0.09855342179194859
+Average time taken to run : 9.339796090126038 
+Std. of time taken to run : 0.12320620413724362
