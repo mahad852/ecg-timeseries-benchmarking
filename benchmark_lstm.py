@@ -7,7 +7,7 @@ import random
 from models.CustomLSTM import CustomLSTM
 from datasets.ecg_mit import ECG_MIT
 import time
-
+from typing import List
 
 context_len = 64
 pred_len = 64
@@ -20,7 +20,7 @@ num_iterations = 10
 
 device = torch.device("cuda")
 
-def batch_loader(dataset: ECG_MIT, indices: list[int], batch_size: int):
+def batch_loader(dataset: ECG_MIT, indices: List[int], batch_size: int):
     for i in range(0, len(indices), batch_size):
         xs = []
         ys = []
